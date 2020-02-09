@@ -18,6 +18,19 @@
         <h2>Comments:</h2>
         <div id="comments-text">
         </div>
+        <form action="/data" method="POST">
+            <h3>Leave a comment</h3>
+            <p>
+                <label for="comment-name">Name:
+                    <input type="text" id="comment-name" name="name" required placeholder="Your name">
+                </label>
+            </p>
+            <p>
+                <label for="comment-text">Comment:</label>
+                <textarea id="comment-text" name="message" placeholder="Lorem ipsum ..." cols="80" rows="8"></textarea>
+            </p>
+            <input type="submit"/>
+        </form>
     </div>
 </div>
 </body>

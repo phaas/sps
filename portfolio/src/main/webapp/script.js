@@ -32,8 +32,17 @@ function loadComments() {
         const data = JSON.parse(comments);
         const container = document.getElementById("comments-text");
         data.forEach(comment => {
+            const header = document.createElement("div");
+            header.className = "comment-header";
+            header.appendChild(document.createTextNode(`Comment by "${comment.name}" at ${comment.time}`));
+
+            const body = document.createElement("div");
+            body.className = "comment-body";
+            body.appendChild(document.createTextNode(comment.comment));
+
             const p = document.createElement("p");
-            p.innerText = comment;
+            p.className = "comment";
+            p.append(header, body);
             container.appendChild(p)
         })
     })

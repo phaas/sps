@@ -15,9 +15,12 @@
 package com.google.sps.servlets;
 
 import com.google.gson.Gson;
+import com.google.sps.JsonConfig;
+import com.google.sps.services.CommentService;
+import com.google.sps.services.InMemoryCommentService;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,24 +33,26 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-	private final ArrayList<String> messages = new ArrayList<>();
 	private final Gson gson;
+	private final CommentService commentService;
 
 	public DataServlet() {
-		gson = new Gson();
+		gson = JsonConfig.configureGson();
+		commentService = new InMemoryCommentService();
 	}
 
 	@Override
-	public void init() throws ServletException {
-		super.init();
-		messages.add("Message 1");
-		messages.add("Message 2");
-		messages.add("Message 3");
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String name = Objects.requireNonNull(req.getParameter("name"), "name is required");
+		String message = Objects.requireNonNull(req.getParameter("message"), "message is required");
+
+		commentService.addComment(name, message);
+		resp.sendRedirect("/");
 	}
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json;");
-		response.getWriter().write(gson.toJson(messages));
+		response.getWriter().write(gson.toJson(commentService.getComments()));
 	}
 }
