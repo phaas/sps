@@ -4,13 +4,18 @@ import java.time.ZonedDateTime;
 
 public class Comment {
 
-	private final String name, comment;
+	private final String name;
+	private final String comment;
 	private final ZonedDateTime time;
 
 	public Comment(String name, String comment) {
+		this(name, comment, java.time.ZonedDateTime.now());
+	}
+
+	protected Comment(String name, String comment, ZonedDateTime time) {
 		this.name = name;
 		this.comment = comment;
-		this.time = java.time.ZonedDateTime.now();
+		this.time = time;
 	}
 
 	public String getName() {

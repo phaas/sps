@@ -17,7 +17,7 @@ package com.google.sps.servlets;
 import com.google.gson.Gson;
 import com.google.sps.JsonConfig;
 import com.google.sps.services.CommentService;
-import com.google.sps.services.InMemoryCommentService;
+import com.google.sps.services.DatastoreCommentService;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet that returns some example content. TODO: modify this file to handle comments data
+ * Servlet that stores and serves comments
  */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
@@ -38,7 +38,7 @@ public class DataServlet extends HttpServlet {
 
 	public DataServlet() {
 		gson = JsonConfig.configureGson();
-		commentService = new InMemoryCommentService();
+		commentService = new DatastoreCommentService();
 	}
 
 	@Override
