@@ -16,13 +16,30 @@
  * Adds a random greeting to the page.
  */
 function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+    const greetings =
+        ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+    // Pick a random greeting.
+    const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+    // Add it to the page.
+    const greetingContainer = document.getElementById('greeting-container');
+    greetingContainer.innerText = greeting;
 }
+
+function loadComments() {
+    fetch("/data").then(response => response.text()).then(comments => {
+        const data = JSON.parse(comments);
+        const container = document.getElementById("comments-text");
+        data.forEach(comment => {
+            const p = document.createElement("p");
+            p.innerText = comment;
+            container.appendChild(p)
+        })
+    })
+}
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    console.log("DOMContentLoaded, fetching comments...");
+    loadComments()
+});
