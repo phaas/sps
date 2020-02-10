@@ -53,7 +53,7 @@ file:
 <dependency>
   <groupId>com.google.appengine</groupId>
   <artifactId>appengine-api-1.0-sdk</artifactId>
-  <version>1.9.59</version>
+  <version>1.9.78</version>
 </dependency>
 ```
 
@@ -295,14 +295,14 @@ you can deploy it to your live server!
 
 Your
 <walkthrough-editor-open-file
-    filePath="software-product-sprint/portfolio/src/main/webapp/WEB-INF/appengine-web.xml">
-  appengine-web.xml
+    filePath="software-product-sprint/portfolio/pom.xml">
+  pom.xml
 </walkthrough-editor-open-file>
 file should already contain your project ID. If so, you can deploy to your live
 server by executing this command:
 
 ```bash
-mvn appengine:update
+mvn package appengine:deploy
 ```
 
 After the command successfully completes, you can navigate to
