@@ -42,7 +42,7 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>2.2.0</version>
         <configuration>
-          <projectId>YOUR_PROJECT_ID_HERE</projectId>
+          <projectId>learn-225204</projectId>
           <version>1</version>
         </configuration>
       </plugin>
